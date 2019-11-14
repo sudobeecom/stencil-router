@@ -1,6 +1,6 @@
 {
 	"name": "@sudobee/stencil-router",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"unpkg": "dist/stencil-route/stencil-route.js",
