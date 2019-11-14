@@ -1,11 +1,27 @@
 {
-  "name": "root",
-  "private": true,
-  "devDependencies": {
-    "@stencil/core": "1.0.2",
-    "@types/jest": "^23.3.1",
-    "jest": "^23.4.2",
-    "lerna": "^3.0.3",
-    "ts-jest": "^22.4.2"
-  }
+	"name": "@sudobee/stencil-router",
+	"version": "1.0.1",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"unpkg": "dist/stencil-route/stencil-route.js",
+	"types": "dist/types/index.d.ts",
+	"collection": "dist/collection/collection-manifest.json",
+	"collection:main": "dist/collection/index.js",
+	"files": [
+		"dist/"
+	],
+	"scripts": {
+		"dev": "stencil build --dev",
+		"build": "stencil build"
+	},
+	"dependencies": {
+		"@stencil/state-tunnel": "^1.0.1",
+		"@stencil/core": "1.2.5"
+	},
+	"devDependencies": {
+		"workbox-build": "4.3.1"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
