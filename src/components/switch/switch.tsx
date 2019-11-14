@@ -1,5 +1,13 @@
-import { Component, Prop, Element, Watch, ComponentInterface, h } from '@stencil/core';
-import { QueueApi } from '@stencil/core/dist/declarations';
+import {
+	Component,
+	Prop,
+	Element,
+	Watch,
+	ComponentInterface,
+	h,
+	Event
+} from '@stencil/core';
+import { QueueApi, EventEmitter } from '@stencil/core/dist/declarations';
 import {
 	LocationSegments,
 	MatchResults,
@@ -41,6 +49,9 @@ export class RouteSwitch implements ComponentInterface {
 	@Prop() scrollTopOffset?: number;
 	@Prop() location?: LocationSegments;
 	@Prop() routeViewsUpdated?: (options: RouteViewOptions) => void;
+
+	@Event() onRouteWillChange!: EventEmitter<LocationSegments>;
+	@Event() onRouteDidChange!: EventEmitter<LocationSegments>;
 
 	activeIndex?: number;
 	subscribers: Child[] = [];
@@ -94,6 +105,8 @@ export class RouteSwitch implements ComponentInterface {
 		}
 		this.activeIndex = newActiveIndex;
 
+		this.onRouteWillChange.emit(newLocation);
+
 		// Set all props on the new active route then wait until it says that it
 		// is completed
 		const activeChild = this.subscribers[this.activeIndex];
@@ -129,6 +142,8 @@ export class RouteSwitch implements ComponentInterface {
 					...routeViewUpdatedOptions
 				});
 			}
+
+			this.onRouteDidChange.emit(newLocation);
 		};
 	}
 
